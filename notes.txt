@@ -1,0 +1,40 @@
+
+# Open an SSH terminal to AWS EC2 instance, using my private key
+ssh -i cs184-marco.pem ubuntu@ec2-54-227-127-42.compute-1.amazonaws.com
+
+# Copy files (*.js) using SCP to the EC2 instance (note the ':' on the end means to the home folder), again using the private key
+scp -i /media/Storage/Documents/Coursera_Startup_Eng/cs184-marco.pem *.js  ubuntu@ec2-54-227-127-42.compute-1.amazonaws.com:
+
+#install git
+sudo apt-get install -y git-core
+
+#get the files to setup an instance
+git clone https://github.com/startup-class/setup.git
+
+# 1)install heroku
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+# 2) Login and set up your SSH keys
+heroku login
+ssh-keygen -t rsa
+heroku keys:add
+# 3) Clone a sample repo and push to heroku
+git clone https://github.com/heroku/node-js-sample.git
+cd node-js-sample
+heroku create
+git push heroku master
+
+#fork it via web
+
+#clone my own project
+git clone https://github.com/marco999/bitstarter
+
+#commit a change to Heroku
+git push heroku master
+
+#commit a change back to my git account
+git push origin master
+
+#my URL for the assignmnent (HW4b)
+https://github.com/marco999/bitstarter/blob/dd3d93568d648167e5d11e4600eb929e0fa5e97d/index.html
+
+
